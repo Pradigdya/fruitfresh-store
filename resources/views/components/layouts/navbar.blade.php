@@ -39,18 +39,104 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span class="text-white badge badge-sm badge-success indicator-item">8</span>
+                        <span
+                            class="text-white badge badge-sm badge-success indicator-item">{{ auth()->user()->cart?->items->sum('qty') ?? 0 }}</span>
                     </div>
                 </div>
                 <div tabindex="0"
-                    class="mt-3 z-[100] card card-compact dropdown-content w-52 bg-base-100 shadow-xl border border-gray-100">
-                    <div class="card-body">
-                        <span class="text-lg font-bold text-gray-800">8 Items</span>
-                        <span class="font-semibold text-green-600">Subtotal: Rp 99.000</span>
-                        <div class="mt-2 card-actions">
-                            <button class="text-white btn btn-success btn-block btn-sm">View cart</button>
+                    class="mt-3 z-[100] dropdown-content w-80 rounded-2xl bg-white shadow-2xl border border-gray-100">
+
+                    <div class="p-5">
+
+                        {{-- Header --}}
+                        <div class="flex items-center justify-between mb-4">
+
+                            <h1 class="text-lg font-bold text-gray-800">
+                                Shopping Cart
+                            </h1>
+
+                            <span class="text-sm text-gray-500">
+                                {{ auth()->user()->cart?->items->sum('qty') ?? 0 }} Items
+                            </span>
+
                         </div>
+
+                        {{-- Jika Cart Kosong --}}
+                        @if (!auth()->user()->cart || auth()->user()->cart->items->count() == 0)
+                            <div class="py-10 text-center">
+
+                                <p class="text-gray-400">
+                                    Cart masih kosong
+                                </p>
+
+                            </div>
+                        @else
+                            {{-- List Product --}}
+                            <div class="flex flex-col gap-4 max-h-[300px] overflow-y-auto">
+
+                                @php
+                                    $subtotal = 0;
+                                @endphp
+
+                                @foreach (auth()->user()->cart->items as $item)
+                                    @php
+                                        $subtotal += $item->product->price * $item->qty;
+                                    @endphp
+
+                                    <div class="flex items-center gap-3">
+
+                                        {{-- Gambar --}}
+                                        <img src="{{ asset('images/' . $item->product->image) }}"
+                                            class="object-cover border w-14 h-14 rounded-xl">
+
+                                        {{-- Detail --}}
+                                        <div class="flex-1">
+
+                                            <h2 class="font-semibold text-gray-800">
+                                                {{ $item->product->name }}
+                                            </h2>
+
+                                            <p class="text-sm text-gray-500">
+                                                Qty: {{ $item->qty }}
+                                            </p>
+
+                                            <p class="text-sm font-semibold text-green-600">
+                                                Rp {{ number_format($item->product->price, 0, ',', '.') }}
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+                                @endforeach
+
+                            </div>
+
+                            {{-- Footer --}}
+                            <div class="pt-4 mt-5 border-t">
+
+                                <div class="flex items-center justify-between mb-4">
+
+                                    <span class="font-medium text-gray-600">
+                                        Subtotal
+                                    </span>
+
+                                    <span class="text-lg font-bold text-green-600">
+
+                                        Rp {{ number_format($subtotal, 0, ',', '.') }}
+
+                                    </span>
+
+                                </div>
+
+                                <button class="w-full text-white btn btn-success rounded-xl">
+                                    View Cart
+                                </button>
+
+                            </div>
+                        @endif
+
                     </div>
+
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 
 
 
@@ -14,6 +15,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [ReviewController::class, 'index'])->name('dashboard');
 
     Route::resource('shop', ShopController::class);
+
+
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])
+        ->name('cart.add');
 });
 
 

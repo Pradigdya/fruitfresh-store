@@ -39,43 +39,7 @@
     <div class="grid grid-cols-4 gap-6 px-20 mt-10">
 
         @foreach ($products as $product)
-            <div class="mt-10 rounded shadow-sm card bg-base-100 rounded-2xl">
-
-                <a href="{{ route('shop.show', $product->id) }}">
-
-                    <figure>
-                        <img src="{{ asset('images/' . $product->image) }}" class="w-[200px]" />
-                    </figure>
-
-                </a>
-
-                <div class="flex flex-col gap-1 card-body bg-[#457545] text-white rounded-b-2xl">
-
-                    <h2 class="card-title">
-                        {{ $product->name }}
-
-                        <div class="badge badge-secondary">
-                            {{ $product->category }}
-                        </div>
-                    </h2>
-
-                    <p>{{ $product->description }}</p>
-
-                    <div class="items-center justify-between card-actions">
-
-                        <p class="text-lg font-semibold">
-                            Rp. {{ number_format($product->price, 0, ',', '.') }}
-                        </p>
-
-                        <button class="rounded-lg btn btn-white w-13 h-13">
-                            +
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
+            <x-cards.product-card :product="$product" />
         @endforeach
 
     </div>
