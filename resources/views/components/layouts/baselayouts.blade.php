@@ -24,7 +24,7 @@
 
 </head>
 
-<body>
+<body class="font-poppins bg-slate-50">
     @yield('content')
 </body>
 

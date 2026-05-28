@@ -12,7 +12,8 @@ use App\Http\Controllers\AuthController;
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [ReviewController::class, 'index'])->name('dashboard');
-    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+
+    Route::resource('shop', ShopController::class);
 });
 
 

@@ -7,6 +7,11 @@
     <div class="px-20 mt-15">
         <ul class="flex flex-wrap gap-5 mt-6 menu menu-horizontal bg-base-200 rounded-box">
             <li>
+                <a class="tooltip" data-tip="All">
+                    <x-heroicon-o-circle-stack Copy SVG Copy JSX class="w-6 h-6 " />
+                </a>
+            </li>
+            <li>
                 <a class="tooltip" data-tip="Fruits">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -31,31 +36,47 @@
         </ul>
     </div>
 
-    <div class="flex flex-wrap px-20 mt-10">
+    <div class="grid grid-cols-4 gap-6 px-20 mt-10">
 
-        <div class="rounded shadow-sm card bg-base-100 w-75 rounded-2xl">
-            <a href="">
-                <figure>
-                    <img src="{{ asset('images/buahjeruk.png') }}" alt="Shoes" class="w-[200px]" />
-                </figure>
-            </a>
+        @foreach ($products as $product)
+            <div class="mt-10 rounded shadow-sm card bg-base-100 rounded-2xl">
 
-            <div class=" flex flex-col gap-1 card-body bg-[#457545] text-white rounded-b-2xl">
+                <a href="{{ route('shop.show', $product->id) }}">
 
-                <h2 class="card-title">
-                    Jeruk
-                    <div class="badge badge-secondary">BUAH</div>
-                </h2>
-                <p>Fresh & Manis</p>
+                    <figure>
+                        <img src="{{ asset('images/' . $product->image) }}" class="w-[200px]" />
+                    </figure>
 
-                <div class="items-center justify-between card-actions">
-                    <p class="text-lg font-semibold">Rp. 25.000 / Kg</p>
-                    <button class="rounded-lg btn btn-white w-13 h-13"> <x-heroicon-s-plus
-                            class="w-10 h-10 text-slate-600" />
-                    </button>
+                </a>
+
+                <div class="flex flex-col gap-1 card-body bg-[#457545] text-white rounded-b-2xl">
+
+                    <h2 class="card-title">
+                        {{ $product->name }}
+
+                        <div class="badge badge-secondary">
+                            {{ $product->category }}
+                        </div>
+                    </h2>
+
+                    <p>{{ $product->description }}</p>
+
+                    <div class="items-center justify-between card-actions">
+
+                        <p class="text-lg font-semibold">
+                            Rp. {{ number_format($product->price, 0, ',', '.') }}
+                        </p>
+
+                        <button class="rounded-lg btn btn-white w-13 h-13">
+                            +
+                        </button>
+
+                    </div>
+
                 </div>
+
             </div>
-        </div>
+        @endforeach
 
     </div>
 

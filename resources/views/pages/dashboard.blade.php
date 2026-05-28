@@ -10,7 +10,7 @@
             <h1 class="text-[48px] pt-10 text-white ml-25 font-bold">Jual Beli <br>Buah Segar dan<br> Sayuran</h1>
             <div class=" ml-25 mt-7 flex flex-wrap gap-2.5">
 
-                <a href="{{ route('shop') }}">
+                <a href="/shop">
                     <div class="px-8 py-2 text-black bg-white rounded rounded-lg">
                         Mulai Belanja
                     </div>
@@ -71,7 +71,7 @@
 
                 <a href="">
                     <div class="flex justify-center w-35 bg-[#23621F] rounded-xl">
-                        <a href="{{ route('shop') }}">
+                        <a href="/shop">
                             <h1 class="px-4 py-2 font-bold text-center text-white text-large ">Lihat Produk</h1>
                         </a>
 
