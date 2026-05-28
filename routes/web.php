@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', [ReviewController::class, 'index'])->name('dashboard');
+
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 
 
 // REGISTER

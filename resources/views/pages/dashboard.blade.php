@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('components.layouts.baselayouts')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
-
+@section('title', 'FruitFresh - Solusi Buah Segar dan Sayuran')
+@section('content')
     @include('components.layouts.navbar')
 
     <div class="w-full px-20 font-poppins">
@@ -61,10 +52,10 @@
                 </ul>
             </div>
 
-            <div class="flex self-start justify-center">
+            <div class="flex flex-col items-center justify-center">
                 <div class="hover-3d">
                     <!-- content -->
-                    <figure class="-mt-10 w-75 rounded-2xl">
+                    <figure class="-mt-20 w-75 rounded-2xl">
                         <img src="{{ asset('images/gambarbuah.png') }}" />
                     </figure>
                     <!-- 8 empty divs needed for the 3D effect -->
@@ -77,12 +68,18 @@
                     <div></div>
                     <div></div>
                 </div>
+
+                <a href="">
+                    <div class="flex justify-center w-35 bg-[#23621F] rounded-xl">
+                        <h1 class="px-4 py-2 font-bold text-center text-white text-large ">Lihat Produk</h1>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 
     <div>
-        <h1 class="flex items-center justify-center text-3xl font-bold">Aman dan Terlindungi</h1>
+        <h1 class="flex items-center justify-center mt-10 text-3xl font-bold">Aman dan Terlindungi</h1>
         {{-- Card Rating --}}
         <div class="px-20">
             <div class="grid items-stretch grid-cols-1 gap-6 mt-10 sm:grid-cols-2 md:grid-cols-3 justify-items-center">
@@ -96,7 +93,4 @@
         {{-- Card Rating End --}}
     </div>
     @include('components.layouts.footer')
-
-</body>
-
-</html>
+@endsection
